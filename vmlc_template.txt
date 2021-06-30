@@ -1,0 +1,11 @@
+VMLC_DASHBOARD:dashboard:db
+VMLC_CONNECTION_CONSUMER:connectionconsumer:cc
+VMLC_EVENT_SERVICE:eventservice:es
+VMLC_EVENTS_CONSUMER:eventsconsumer:ec
+VMLC_OM_CONSUMER:omconsumer:omc
+VMLC_OM_PRODUCER:omproducer:omp
+VMLC_VES_CONSUMER:vesconsumer:vc
+VMLC_VES_EVENT_TRANSLATOR:veseventtranslator:vet
+VMLC_VES_OM_TRANSLATOR:vesomtranslator:vot
+VMLC_VES_SYSLOG_TRANSLATOR:vessyslogtranslator:vst
+VMLC_REPORT_GENERATOR:reportgenerator:rg
