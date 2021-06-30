@@ -37,6 +37,8 @@ class VmlcEnv:
         self.nodes = []
         lines = open(file).readlines()
         for line in lines:
+            line = line.strip()
+            if len(line) == 0: continue
             words = line.split(':')
             self.nodes.append(EnvNode(words[0].strip(), words[1].strip(), words[2].strip()))
 
