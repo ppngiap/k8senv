@@ -14,8 +14,8 @@ class EnvNode:
 
     def set_pod(self, pod):
         if len(self.pod):
-            print("#Pod exist : ", self.pod)
-            print("#Pod to add: ", pod)
+            print("#Pod exist : %s" % self.pod)
+            print("#Pod to add: %s" % pod)
         self.pod = pod
 
     def output(self):

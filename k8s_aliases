@@ -12,6 +12,13 @@ alias dimgg='dimg | grep'
 alias dimgves='dimg | grep ves'
 alias dimgdb='dimg | grep dashboard'
 
+function dimgrmall() {
+	sudo docker image rm $1
+	ssh -t kwo1 "sudo docker image rm $1"
+	ssh -t kwo2 "sudo docker image rm $1"
+}
+
+
 alias kk='kubectl'
 alias kkclusterinfo='kk custer-info'
 alias kkgetservice='kk get service'
