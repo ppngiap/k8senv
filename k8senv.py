@@ -14,8 +14,8 @@ class EnvNode:
 
     def set_pod(self, pod):
         if len(self.pod):
-            print("#Pod exist : ", self.pod)
-            print("#Pod to add: ", pod)
+            print("#Pod exist : %s" % self.pod)
+            print("#Pod to add: %s" % pod)
         self.pod = pod
 
     def output(self):
@@ -37,6 +37,8 @@ class VmlcEnv:
         self.nodes = []
         lines = open(file).readlines()
         for line in lines:
+            line = line.strip()
+            if len(line) == 0: continue
             words = line.split(':')
             self.nodes.append(EnvNode(words[0].strip(), words[1].strip(), words[2].strip()))
 

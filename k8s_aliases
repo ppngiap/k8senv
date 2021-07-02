@@ -1,0 +1,98 @@
+alias ks='source ~/.k8senv/k8s_aliases'
+alias kks='python ~/.k8senv/k8senv.py > /tmp/k8senv; . /tmp/k8senv'
+alias k='vim ~/.k8senv/k8s_aliases; ks'
+alias hg='history | grep -i'
+alias ag='alias | grep -i'
+
+alias ports='sudo lsof -Pnl +M -i -cmd | grep -E "LISTEN|TCP|UDP"'
+
+alias dimg='sudo docker image ls'
+alias dls='dimg'
+alias dimgg='dimg | grep'
+alias dimgves='dimg | grep ves'
+alias dimgdb='dimg | grep dashboard'
+
+function dimgrmall() {
+	sudo docker image rm $1
+	ssh -t kwo1 "sudo docker image rm $1"
+	ssh -t kwo2 "sudo docker image rm $1"
+}
+
+
+alias kk='kubectl'
+alias kkclusterinfo='kk custer-info'
+alias kkgetservice='kk get service'
+alias kkgetpods='kk get pod -o wide'
+alias kkgp='kkgetpods'
+alias kkgpinit='kkgp | grep -i Init'
+alias kkinit='kkgpinit'
+alias kkgpterm='kkgp | grep -i Term'
+alias kkterm='kkgpterm'
+alias kkgperror='kkgp | grep -i error'
+alias kkerror='kkgperror'
+alias kkerr='kkgperror'
+alias kkgpdb='kkgp | grep -i dashboard'
+alias kkdb='kkgpdb'
+alias kkgpves='kkgp | grep -i ves'
+alias kkves='kkgpves'
+alias kkgpcc='kkgp | grep -i conn| grep -i consum'
+alias kkcc='kkgpcc'
+alias kkredis='kkgp | grep redis'
+alias kkomc='kkgp | grep omconsumer'
+alias kkomp='kkgp | grep omproducer'
+alias kkorg='kkgp | grep reportgenerator'
+alias kkrg='kkorg'
+alias kkgetpodyaml='kk get pod -o yaml'
+alias kkdescribepod='kk describe pod'
+alias kkdp='kkdescribepod'
+alias kksaml='kkdp | grep saml'
+alias kkdescribeservice='kk describe service'
+alias kkgetnode='kk get node'
+alias kkdescribenode='kk describe node'
+alias kksysgetpod='kk -n kube-system get pod -o wide'
+alias kksysdescribepod='kk -n kube-system describe pod'
+
+alias kkapiversions='kk api-versions'
+alias kkgetproxyconfigmap='kk get -n kube-system configmap kube-proxy -o yaml'
+alias kkdescribeproxy='kk describe -n kube-system pod kube-proxy'
+alias kkdelete='kubectl delete -f'
+alias kkdeletedb='kkdelete dashboard.yaml'
+alias kkdeldb='kkdeletedb'
+alias kkapply='kubectl apply -f'
+alias kkapplydb='kkapply dashboard.yaml'
+
+alias kkdbshell=''
+
+
+alias tailtopic='kubectl exec --stdin --tty kafka-0 -- /opt/bitnami/kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic'
+alias tailom='tailtopic OM'
+alias tailevent='tailtopic EVENT'
+alias tailves='tailtopic VES'
+alias tailconnection='tailtopic CONNECTION'
+
+alias listtopics='kubectl exec --stdin --tty kafka-0 -- /opt/bitnami/kafka/bin/kafka-topics.sh --list --zookeeper kafka-zookeeper'
+alias kklisttopics='listtopics'
+alias kklisttopics='listtopics'
+alias gentopicdata='kubectl exec --stdin --tty kafka-0 -- /opt/bitnami/kafka/bin/kafka-console-producer.sh --bootstrap-server kafka:9092 --topic'
+alias kkgentopicdata='gentopicdata'
+
+alias kkbash='echo "kubectl exec -it \$1 -- /bin/bash" > /tmp/kkbash.sh; . /tmp/kkbash.sh'
+
+alias dockerload='sudo docker load -i'
+
+alias cptar2kwo='echo "echo kwo1 ; scp \$1 kwo1:~/dev/ ; echo kwo2; scp \$1 kwo2:~/dev/" > /tmp/cptar2kwo.sh; . /tmp/cptar2kwo.sh'
+alias loadtarkwo='echo "echo kwo1 ; ssh -t kwo1 ""sudo docker load -i ~/dev/\$1"" ; echo kwo2 ; ssh -t kwo2 ""sudo docker load -i ~/dev/\$1""" > /tmp/loadtarkwo.sh; . /tmp/loadtarkwo.sh'
+
+alias vydb='vim dashboard.yaml'
+alias kklogs='kk logs'
+alias kklog='kklogs'
+
+alias cdomc='dev; cd om_consumer'
+alias cdomp='dev; cd omproducer'
+alias cdrpg='dev; cd report_generator'
+alias cdes='dev; cd event_service'
+alias cdec='dev; cd event_consumer'
+alias cddb='dev; cd dashboard'
+alias cdcc='dev; cd connection_consumer'
+
+alias kkforwardport='kubectl port-forward --address 0.0.0.0 $VMLC_DASHBOARD 80:8000'
