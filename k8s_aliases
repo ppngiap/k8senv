@@ -96,3 +96,33 @@ alias cddb='dev; cd dashboard'
 alias cdcc='dev; cd connection_consumer'
 
 alias kkforwardport='kubectl port-forward --address 0.0.0.0 $VMLC_DASHBOARD 80:8000'
+
+alias kkdeleteallpods='kubectl delete --all pods --namespace=default'
+
+function k8postinit() {
+	cd /tcs/dlpdeployment/ansible/
+	ansible-playbook -i inventory-vas-$1.ini k8postinit.yml
+}
+
+function kkcpdb {
+	echo "kubectl cp $1 $VMLC_DASHBOARD:/$1"
+	kubectl cp $1 $VMLC_DASHBOARD:/$1
+}
+
+function kkexecdb {
+	echo kubectl exec $VMLC_DASHBOARD -- "$@"
+	kubectl exec $VMLC_DASHBOARD -- "$@"
+}
+
+alias kkdbps='kkexecdb ps -agx'
+
+function kkdblog {
+	kkexecdb tail -f /archive/log/dlp/dlp_rest_proxy.log
+}
+
+function kkdbvilog {
+	kubectl cp $VMLC_DASHBOARD:/archive/log/dlp/dlp_rest_proxy.log /tmp/dlp_rest_proxy.log
+	vim /tmp/dlp_rest_proxy.log
+}
+
+
