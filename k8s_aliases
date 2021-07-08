@@ -129,4 +129,8 @@ function kkdbvilog {
 	vim /tmp/dlp_rest_proxy.log
 }
 
-
+function yaml2json() { 
+        echo "import yaml,pprint;pprint.pprint(yaml.load(open(\"$1\").read(), Loader=yaml.FullLoader))" > /tmp/y2j.py
+        python3 /tmp/y2j.py
+}
+alias y2j='yaml2json'
