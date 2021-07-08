@@ -130,7 +130,7 @@ function kkdbvilog {
 }
 
 function yaml2json() { 
-        echo "import yaml,pprint;pprint.pprint(yaml.load(open(\"$1\").read(), Loader=yaml.FullLoader))" > /tmp/y2j.py
+        echo -e "import yaml,pprint;\nss=yaml.load_all(open(\"$1\").read(), Loader=yaml.FullLoader);\nfor s in ss: \n\tpprint.pprint(s)" > /tmp/y2j.py
         python3 /tmp/y2j.py
 }
 alias y2j='yaml2json'
