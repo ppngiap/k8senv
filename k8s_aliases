@@ -1,5 +1,5 @@
 alias ks='source ~/.k8senv/k8s_aliases'
-alias kks='python ~/.k8senv/k8senv.py > /tmp/k8senv; . /tmp/k8senv'
+alias kks='python ~/.k8senv/genenv.py > /tmp/k8senv; . /tmp/k8senv'
 alias k='vim ~/.k8senv/k8s_aliases; ks'
 alias hg='history | grep -i'
 alias ag='alias | grep -i'
@@ -115,12 +115,16 @@ function kkexecdb {
 }
 
 alias kkdbps='kkexecdb ps -agx'
+alias kkdbimg='kkdpdb | grep -i image'
 
 function kkdblog {
 	kkexecdb tail -f /archive/log/dlp/dlp_rest_proxy.log
 }
 
 function kkdbvilog {
+	if [ -f /tmp/dlp_rest_proxy.log ]; then
+		rm /tmp/dlp_rest_proxy.log
+	fi
 	kubectl cp $VMLC_DASHBOARD:/archive/log/dlp/dlp_rest_proxy.log /tmp/dlp_rest_proxy.log
 	vim /tmp/dlp_rest_proxy.log
 }
