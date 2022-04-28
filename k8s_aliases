@@ -134,3 +134,27 @@ function yaml2json() {
         python3 /tmp/y2j.py
 }
 alias y2j='yaml2json'
+
+
+
+DT=`date +%Y-%m-%dT%H%M%S`
+
+
+function pushk8senv() {
+        ssh -t $1 "if \[ ! -d ~/.k8senv \]; then mkdir ~/.k8senv; fi"
+        scp -r ~/.k8senv/* $1:~/.k8senv/
+}
+
+alias k8spush=pushk8senv
+
+function pullk8senv() {
+        ssh -t $1 "ls -l ~/.k8senv/*"
+        scp -r $1:~/.k8senv/* ~/.k8senv/
+}
+
+alias k8spull=pullk8senv
+
+function ports() {
+  lsof -Pnl +M -i -cmd | grep -E "LISTEN|TCP|UDP"
+}
+
